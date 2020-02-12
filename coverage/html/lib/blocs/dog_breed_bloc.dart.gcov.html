@@ -31,13 +31,13 @@
             <td class="headerValue">lcov.info</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntry">17</td>
-            <td class="headerCovTableEntry">19</td>
-            <td class="headerCovTableEntryMed">89.5 %</td>
+            <td class="headerCovTableEntry">20</td>
+            <td class="headerCovTableEntry">20</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2020-02-12 11:23:16</td>
+            <td class="headerValue">2020-02-12 17:05:44</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">0</td>
@@ -63,63 +63,65 @@
 <a name="1"><span class="lineNum">       1 </span>            : import 'package:dio/dio.dart';</a>
 <span class="lineNum">       2 </span>            : import 'package:dxdart/core/constants.dart';
 <span class="lineNum">       3 </span>            : import 'package:dxdart/core/network/d_dio.dart';
-<span class="lineNum">       4 </span>            : import 'package:injectable/injectable.dart';
-<span class="lineNum">       5 </span>            : import 'package:rxdart/rxdart.dart';
-<span class="lineNum">       6 </span>            : 
-<span class="lineNum">       7 </span>            : import 'package:dxdart/models/dog_breed_model.dart';
-<span class="lineNum">       8 </span>            : 
-<span class="lineNum">       9 </span>            : @singleton
-<span class="lineNum">      10 </span>            : class NumberTriviaBloc {
-<span class="lineNum">      11 </span>            :   // DEPENDENCIES
-<span class="lineNum">      12 </span>            :   /////////////////////////////////////////
-<span class="lineNum">      13 </span>            :   final DDio dioClient;
-<span class="lineNum">      14 </span>            : 
-<span class="lineNum">      15 </span>            :   // CONSTRUCTOR
-<span class="lineNum">      16 </span>            :   /////////////////////////////////////////
-<span class="lineNum">      17 </span><span class="lineCov">          2 :   NumberTriviaBloc({this.dioClient}) {</span>
-<span class="lineNum">      18 </span><span class="lineCov">          4 :     _subjectDogBreed = BehaviorSubject&lt;DogBreed&gt;();</span>
-<span class="lineNum">      19 </span>            :   }
-<span class="lineNum">      20 </span>            : 
-<span class="lineNum">      21 </span>            :   // STATES
-<span class="lineNum">      22 </span>            :   /////////////////////////////////////////
-<span class="lineNum">      23 </span>            :   BehaviorSubject&lt;DogBreed&gt; _subjectDogBreed;
+<span class="lineNum">       4 </span>            : import 'package:rxdart/rxdart.dart';
+<span class="lineNum">       5 </span>            : 
+<span class="lineNum">       6 </span>            : import 'package:dxdart/models/dog_breed_model.dart';
+<span class="lineNum">       7 </span>            : 
+<span class="lineNum">       8 </span>            : class NumberTriviaBloc {
+<span class="lineNum">       9 </span>            :   // DEPENDENCIES
+<span class="lineNum">      10 </span>            :   /////////////////////////////////////////
+<span class="lineNum">      11 </span>            :   final DDio dioClient;
+<span class="lineNum">      12 </span>            : 
+<span class="lineNum">      13 </span>            :   // CONSTRUCTOR
+<span class="lineNum">      14 </span>            :   /////////////////////////////////////////
+<span class="lineNum">      15 </span><span class="lineCov">          2 :   NumberTriviaBloc({this.dioClient}) {</span>
+<span class="lineNum">      16 </span><span class="lineCov">          4 :     _subjectDogBreed = BehaviorSubject&lt;DogBreed&gt;();</span>
+<span class="lineNum">      17 </span>            :   }
+<span class="lineNum">      18 </span>            : 
+<span class="lineNum">      19 </span>            :   // STATES
+<span class="lineNum">      20 </span>            :   /////////////////////////////////////////
+<span class="lineNum">      21 </span>            :   BehaviorSubject&lt;DogBreed&gt; _subjectDogBreed;
+<span class="lineNum">      22 </span>            : 
+<span class="lineNum">      23 </span><span class="lineCov">          6 :   ValueStream&lt;DogBreed&gt; get breedStream =&gt; _subjectDogBreed.stream;</span>
 <span class="lineNum">      24 </span>            : 
-<span class="lineNum">      25 </span><span class="lineCov">          6 :   ValueStream&lt;DogBreed&gt; get breedStream =&gt; _subjectDogBreed.stream;</span>
-<span class="lineNum">      26 </span>            : 
-<span class="lineNum">      27 </span>            :   // METHODS
-<span class="lineNum">      28 </span>            :   /////////////////////////////////////////
-<span class="lineNum">      29 </span><span class="lineCov">          2 :   Future&lt;void&gt; getBreed() async {</span>
-<span class="lineNum">      30 </span>            :     try {
-<span class="lineNum">      31 </span><span class="lineCov">          6 :       final response = await dioClient.get(</span>
-<span class="lineNum">      32 </span>            :         'https://api.thedogapi.com/v1/images/search',
-<span class="lineNum">      33 </span><span class="lineCov">          2 :         options: Options(</span>
-<span class="lineNum">      34 </span><span class="lineCov">          2 :           headers: {'x-api-key': API_KEY},</span>
-<span class="lineNum">      35 </span>            :         ),
-<span class="lineNum">      36 </span>            :       );
-<span class="lineNum">      37 </span>            : 
-<span class="lineNum">      38 </span><span class="lineCov">          2 :       Map&lt;String, dynamic&gt; breed = response.data[0];</span>
-<span class="lineNum">      39 </span><span class="lineCov">          1 :       Map&lt;String, dynamic&gt; breedMap = {</span>
-<span class="lineNum">      40 </span><span class="lineCov">          3 :         'name': (breed['breeds'] as List).length &gt; 0</span>
-<span class="lineNum">      41 </span><span class="lineCov">          3 :             ? breed['breeds'][0]['name']</span>
-<span class="lineNum">      42 </span>            :             : '',
-<span class="lineNum">      43 </span><span class="lineCov">          3 :         'origin': (breed['breeds'] as List).length &gt; 0</span>
-<span class="lineNum">      44 </span><span class="lineCov">          3 :             ? breed['breeds'][0]['origin']</span>
-<span class="lineNum">      45 </span>            :             : '',
-<span class="lineNum">      46 </span><span class="lineCov">          1 :         'imgUrl': breed['url'],</span>
-<span class="lineNum">      47 </span>            :       };
+<span class="lineNum">      25 </span>            :   // METHODS
+<span class="lineNum">      26 </span>            :   /////////////////////////////////////////
+<span class="lineNum">      27 </span><span class="lineCov">          2 :   Future&lt;void&gt; getBreed() async {</span>
+<span class="lineNum">      28 </span>            :     try {
+<span class="lineNum">      29 </span><span class="lineCov">          6 :       final response = await dioClient.get(</span>
+<span class="lineNum">      30 </span>            :         'https://api.thedogapi.com/v1/images/search',
+<span class="lineNum">      31 </span><span class="lineCov">          2 :         options: Options(</span>
+<span class="lineNum">      32 </span><span class="lineCov">          2 :           headers: {'x-api-key': API_KEY},</span>
+<span class="lineNum">      33 </span>            :         ),
+<span class="lineNum">      34 </span>            :       );
+<span class="lineNum">      35 </span>            : 
+<span class="lineNum">      36 </span><span class="lineCov">          2 :       Map&lt;String, dynamic&gt; breed = response.data[0];</span>
+<span class="lineNum">      37 </span><span class="lineCov">          1 :       Map&lt;String, dynamic&gt; breedMap = {</span>
+<span class="lineNum">      38 </span><span class="lineCov">          3 :         'name': (breed['breeds'] as List).length &gt; 0</span>
+<span class="lineNum">      39 </span><span class="lineCov">          3 :             ? breed['breeds'][0]['name']</span>
+<span class="lineNum">      40 </span>            :             : '',
+<span class="lineNum">      41 </span><span class="lineCov">          3 :         'origin': (breed['breeds'] as List).length &gt; 0</span>
+<span class="lineNum">      42 </span><span class="lineCov">          3 :             ? breed['breeds'][0]['origin']</span>
+<span class="lineNum">      43 </span>            :             : '',
+<span class="lineNum">      44 </span><span class="lineCov">          1 :         'imgUrl': breed['url'],</span>
+<span class="lineNum">      45 </span>            :       };
+<span class="lineNum">      46 </span>            : 
+<span class="lineNum">      47 </span><span class="lineCov">          1 :       final newBreed = DogBreed.fromMap(breedMap);</span>
 <span class="lineNum">      48 </span>            : 
-<span class="lineNum">      49 </span><span class="lineCov">          1 :       final newTrivia = DogBreed.fromMap(breedMap);</span>
-<span class="lineNum">      50 </span>            : 
-<span class="lineNum">      51 </span><span class="lineCov">          3 :       _subjectDogBreed.sink.add(newTrivia);</span>
-<span class="lineNum">      52 </span>            :     } catch (e) {
-<span class="lineNum">      53 </span><span class="lineCov">          4 :       _subjectDogBreed.sink.add(DogBreed(imgUrl: '', name: '', origin: ''));</span>
-<span class="lineNum">      54 </span>            :     }
-<span class="lineNum">      55 </span>            :   }
-<span class="lineNum">      56 </span>            : 
-<span class="lineNum">      57 </span><span class="lineNoCov">          0 :   void dispose() {</span>
-<span class="lineNum">      58 </span><span class="lineNoCov">          0 :     _subjectDogBreed.close();</span>
-<span class="lineNum">      59 </span>            :   }
-<span class="lineNum">      60 </span>            : }
+<span class="lineNum">      49 </span><span class="lineCov">          3 :       _subjectDogBreed.sink.add(newBreed);</span>
+<span class="lineNum">      50 </span>            :     } catch (e) {
+<span class="lineNum">      51 </span><span class="lineCov">          4 :       _subjectDogBreed.sink.add(DogBreed(imgUrl: '', name: '', origin: ''));</span>
+<span class="lineNum">      52 </span>            :     }
+<span class="lineNum">      53 </span>            :   }
+<span class="lineNum">      54 </span>            : 
+<span class="lineNum">      55 </span><span class="lineCov">          1 :   void dispose() {</span>
+<span class="lineNum">      56 </span><span class="lineCov">          2 :     _subjectDogBreed.close();</span>
+<span class="lineNum">      57 </span>            :   }
+<span class="lineNum">      58 </span>            : 
+<span class="lineNum">      59 </span>            :   /////////////////////////////////////////////////////////////////////////////
+<span class="lineNum">      60 </span>            :   // TESTING
+<span class="lineNum">      61 </span><span class="lineCov">          3 :   bool get isClosed =&gt; _subjectDogBreed.isClosed;</span>
+<span class="lineNum">      62 </span>            : }
 </pre>
       </td>
     </tr>

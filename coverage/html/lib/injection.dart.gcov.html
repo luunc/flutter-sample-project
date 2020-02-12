@@ -31,13 +31,13 @@
             <td class="headerValue">lcov.info</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntry">7</td>
-            <td class="headerCovTableEntry">11</td>
-            <td class="headerCovTableEntryLo">63.6 %</td>
+            <td class="headerCovTableEntry">9</td>
+            <td class="headerCovTableEntry">13</td>
+            <td class="headerCovTableEntryLo">69.2 %</td>
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2020-02-12 11:23:16</td>
+            <td class="headerValue">2020-02-12 17:05:44</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">0</td>
@@ -62,35 +62,34 @@
 <pre class="source">
 <a name="1"><span class="lineNum">       1 </span>            : import 'package:dio/dio.dart';</a>
 <span class="lineNum">       2 </span>            : import 'package:get_it/get_it.dart';
-<span class="lineNum">       3 </span>            : import 'package:injectable/injectable.dart';
-<span class="lineNum">       4 </span>            : import 'package:data_connection_checker/data_connection_checker.dart';
-<span class="lineNum">       5 </span>            : 
-<span class="lineNum">       6 </span>            : import 'blocs/dog_breed_bloc.dart';
-<span class="lineNum">       7 </span>            : import 'core/network/d_dio.dart';
-<span class="lineNum">       8 </span>            : import 'core/network/network_info.dart';
-<span class="lineNum">       9 </span>            : import 'injection.iconfig.dart';
+<span class="lineNum">       3 </span>            : import 'package:data_connection_checker/data_connection_checker.dart';
+<span class="lineNum">       4 </span>            : 
+<span class="lineNum">       5 </span>            : import 'blocs/dog_breed_bloc.dart';
+<span class="lineNum">       6 </span>            : import 'core/network/d_dio.dart';
+<span class="lineNum">       7 </span>            : import 'core/network/network_info.dart';
+<span class="lineNum">       8 </span>            : 
+<span class="lineNum">       9 </span><span class="lineCov">          3 : final getIt = GetIt.instance;</span>
 <span class="lineNum">      10 </span>            : 
-<span class="lineNum">      11 </span><span class="lineCov">          3 : final getIt = GetIt.instance;</span>
-<span class="lineNum">      12 </span>            : 
-<span class="lineNum">      13 </span>            : @injectableInit
-<span class="lineNum">      14 </span><span class="lineCov">          1 : Future&lt;void&gt; configureInjection() async {</span>
-<span class="lineNum">      15 </span><span class="lineCov">          3 :   getIt.registerSingleton(Dio());</span>
+<span class="lineNum">      11 </span><span class="lineCov">          1 : Future&lt;void&gt; configureInjection() async {</span>
+<span class="lineNum">      12 </span><span class="lineCov">          3 :   getIt.registerSingleton&lt;Dio&gt;(Dio());</span>
+<span class="lineNum">      13 </span>            : 
+<span class="lineNum">      14 </span><span class="lineCov">          1 :   getIt</span>
+<span class="lineNum">      15 </span><span class="lineCov">          3 :       .registerSingleton&lt;NetworkInfo&gt;(NetworkInfoImpl(DataConnectionChecker()));</span>
 <span class="lineNum">      16 </span>            : 
-<span class="lineNum">      17 </span><span class="lineCov">          4 :   getIt.registerSingleton(NetworkInfoImpl(DataConnectionChecker()));</span>
-<span class="lineNum">      18 </span>            : 
-<span class="lineNum">      19 </span><span class="lineCov">          2 :   getIt.registerSingleton&lt;DDio&gt;(</span>
-<span class="lineNum">      20 </span><span class="lineCov">          5 :       DDio(networkInfo: getIt&lt;NetworkInfoImpl&gt;(), dio: getIt&lt;Dio&gt;()));</span>
-<span class="lineNum">      21 </span>            : 
-<span class="lineNum">      22 </span><span class="lineCov">          2 :   $initGetIt(getIt);</span>
-<span class="lineNum">      23 </span>            : }
-<span class="lineNum">      24 </span>            : 
-<span class="lineNum">      25 </span><span class="lineNoCov">          0 : void unregisterInjection() {</span>
-<span class="lineNum">      26 </span><span class="lineNoCov">          0 :   getIt.unregister&lt;NumberTriviaBloc&gt;(</span>
-<span class="lineNum">      27 </span><span class="lineNoCov">          0 :     disposingFunction: (numberTriviaBloc) {</span>
-<span class="lineNum">      28 </span><span class="lineNoCov">          0 :       numberTriviaBloc.dispose();</span>
-<span class="lineNum">      29 </span>            :     },
-<span class="lineNum">      30 </span>            :   );
-<span class="lineNum">      31 </span>            : }
+<span class="lineNum">      17 </span><span class="lineCov">          2 :   getIt.registerSingleton&lt;DDio&gt;(</span>
+<span class="lineNum">      18 </span><span class="lineCov">          5 :       DDio(networkInfo: getIt&lt;NetworkInfo&gt;(), dio: getIt&lt;Dio&gt;()));</span>
+<span class="lineNum">      19 </span>            : 
+<span class="lineNum">      20 </span><span class="lineCov">          2 :   getIt.registerSingleton&lt;NumberTriviaBloc&gt;(</span>
+<span class="lineNum">      21 </span><span class="lineCov">          3 :       NumberTriviaBloc(dioClient: getIt&lt;DDio&gt;()));</span>
+<span class="lineNum">      22 </span>            : }
+<span class="lineNum">      23 </span>            : 
+<span class="lineNum">      24 </span><span class="lineNoCov">          0 : void unregisterInjection() {</span>
+<span class="lineNum">      25 </span><span class="lineNoCov">          0 :   getIt.unregister&lt;NumberTriviaBloc&gt;(</span>
+<span class="lineNum">      26 </span><span class="lineNoCov">          0 :     disposingFunction: (numberTriviaBloc) {</span>
+<span class="lineNum">      27 </span><span class="lineNoCov">          0 :       numberTriviaBloc.dispose();</span>
+<span class="lineNum">      28 </span>            :     },
+<span class="lineNum">      29 </span>            :   );
+<span class="lineNum">      30 </span>            : }
 </pre>
       </td>
     </tr>

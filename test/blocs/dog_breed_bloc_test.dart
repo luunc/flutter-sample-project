@@ -25,8 +25,8 @@ void main() {
     expect(numberTriviaBloc.breedStream.value, null);
   });
 
-  group('getBreed()', () {
-    test('#1 fetch breed successfully', () async {
+  group('#2 getBreed()', () {
+    test('#2.1 fetch breed successfully', () async {
       final expectedJson = await fixture('breeds.json');
       final jsonMap = json.decode(expectedJson);
 
@@ -55,7 +55,7 @@ void main() {
       numberTriviaBloc.getBreed();
     });
 
-    test('#2 fetch breed failed', () async {
+    test('#2.2 fetch breed failed', () async {
       final expectedNumberTrivia = DogBreed(imgUrl: '', name: '', origin: '');
 
       when(mockHttpClient.get(any, options: anyNamed('options')))
@@ -69,5 +69,10 @@ void main() {
 
       numberTriviaBloc.getBreed();
     });
+  });
+
+  test('#3 dispose()', () {
+    numberTriviaBloc.dispose();
+    expect(numberTriviaBloc.isClosed, true);
   });
 }

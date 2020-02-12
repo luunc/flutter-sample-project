@@ -31,13 +31,13 @@
             <td class="headerValue">lcov.info</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntry">27</td>
-            <td class="headerCovTableEntry">34</td>
-            <td class="headerCovTableEntryMed">79.4 %</td>
+            <td class="headerCovTableEntry">28</td>
+            <td class="headerCovTableEntry">35</td>
+            <td class="headerCovTableEntryMed">80.0 %</td>
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2020-02-12 11:23:16</td>
+            <td class="headerValue">2020-02-12 17:05:44</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">0</td>
@@ -82,64 +82,67 @@
 <span class="lineNum">      20 </span><span class="lineCov">          2 :           child: getContainerChild(),</span>
 <span class="lineNum">      21 </span>            :         ),
 <span class="lineNum">      22 </span><span class="lineCov">          2 :         SizedBox(height: 10),</span>
-<span class="lineNum">      23 </span><span class="lineCov">          2 :         GestureDetector(</span>
-<span class="lineNum">      24 </span><span class="lineNoCov">          0 :           onTap: () {</span>
-<span class="lineNum">      25 </span><span class="lineNoCov">          0 :             Navigator.of(context).pushNamed(AnotherScreen.routeName);</span>
-<span class="lineNum">      26 </span>            :           },
-<span class="lineNum">      27 </span><span class="lineCov">          2 :           child: Text(</span>
-<span class="lineNum">      28 </span><span class="lineCov">          5 :             '${data?.name ?? ''}',</span>
-<span class="lineNum">      29 </span><span class="lineCov">          2 :             style: TextStyle(fontSize: 30),</span>
-<span class="lineNum">      30 </span><span class="lineCov">          2 :             key: Key('screens_home_dog_info_NameText'),</span>
-<span class="lineNum">      31 </span>            :           ),
-<span class="lineNum">      32 </span>            :         ),
-<span class="lineNum">      33 </span><span class="lineCov">          2 :         Text(</span>
-<span class="lineNum">      34 </span><span class="lineCov">          5 :           '${data?.origin ?? ''}',</span>
-<span class="lineNum">      35 </span><span class="lineCov">          2 :           key: Key('screens_home_dog_info_OriginText'),</span>
-<span class="lineNum">      36 </span>            :         ),
-<span class="lineNum">      37 </span>            :       ],
-<span class="lineNum">      38 </span>            :     );
-<span class="lineNum">      39 </span>            :   }
-<span class="lineNum">      40 </span>            : 
-<span class="lineNum">      41 </span><span class="lineCov">          2 :   BoxDecoration getDecoration() {</span>
-<span class="lineNum">      42 </span><span class="lineCov">          3 :     if (data?.imgUrl != null) {</span>
-<span class="lineNum">      43 </span><span class="lineCov">          1 :       return BoxDecoration(</span>
-<span class="lineNum">      44 </span><span class="lineCov">          1 :         image: DecorationImage(</span>
-<span class="lineNum">      45 </span>            :           fit: BoxFit.cover,
-<span class="lineNum">      46 </span><span class="lineCov">          3 :           image: NetworkImage(data.imgUrl),</span>
-<span class="lineNum">      47 </span>            :         ),
-<span class="lineNum">      48 </span>            :       );
-<span class="lineNum">      49 </span>            :     }
-<span class="lineNum">      50 </span>            : 
-<span class="lineNum">      51 </span>            :     return null;
-<span class="lineNum">      52 </span>            :   }
+<span class="lineNum">      23 </span><span class="lineCov">          2 :         Text(</span>
+<span class="lineNum">      24 </span><span class="lineCov">          5 :           '${data?.name ?? ''}',</span>
+<span class="lineNum">      25 </span><span class="lineCov">          2 :           style: TextStyle(fontSize: 30),</span>
+<span class="lineNum">      26 </span><span class="lineCov">          2 :           key: Key('screens_home_dog_info_NameText'),</span>
+<span class="lineNum">      27 </span>            :         ),
+<span class="lineNum">      28 </span><span class="lineCov">          2 :         Text(</span>
+<span class="lineNum">      29 </span><span class="lineCov">          5 :           '${data?.origin ?? ''}',</span>
+<span class="lineNum">      30 </span><span class="lineCov">          2 :           key: Key('screens_home_dog_info_OriginText'),</span>
+<span class="lineNum">      31 </span>            :         ),
+<span class="lineNum">      32 </span><span class="lineCov">          2 :         GestureDetector(</span>
+<span class="lineNum">      33 </span><span class="lineNoCov">          0 :           onTap: () {</span>
+<span class="lineNum">      34 </span><span class="lineNoCov">          0 :             Navigator.of(context).pushNamed(AnotherScreen.routeName);</span>
+<span class="lineNum">      35 </span>            :           },
+<span class="lineNum">      36 </span><span class="lineCov">          2 :           child: Text(</span>
+<span class="lineNum">      37 </span>            :             'Tap here to move to new screen.',
+<span class="lineNum">      38 </span>            :           ),
+<span class="lineNum">      39 </span>            :         )
+<span class="lineNum">      40 </span>            :       ],
+<span class="lineNum">      41 </span>            :     );
+<span class="lineNum">      42 </span>            :   }
+<span class="lineNum">      43 </span>            : 
+<span class="lineNum">      44 </span><span class="lineCov">          2 :   BoxDecoration getDecoration() {</span>
+<span class="lineNum">      45 </span><span class="lineCov">          6 :     if (data?.imgUrl != null &amp;&amp; data?.imgUrl != '') {</span>
+<span class="lineNum">      46 </span><span class="lineCov">          1 :       return BoxDecoration(</span>
+<span class="lineNum">      47 </span><span class="lineCov">          1 :         image: DecorationImage(</span>
+<span class="lineNum">      48 </span>            :           fit: BoxFit.cover,
+<span class="lineNum">      49 </span><span class="lineCov">          3 :           image: NetworkImage(data.imgUrl),</span>
+<span class="lineNum">      50 </span>            :         ),
+<span class="lineNum">      51 </span>            :       );
+<span class="lineNum">      52 </span>            :     }
 <span class="lineNum">      53 </span>            : 
-<span class="lineNum">      54 </span><span class="lineCov">          2 :   Widget getContainerChild() {</span>
-<span class="lineNum">      55 </span><span class="lineCov">          3 :     if (data?.imgUrl == null) {</span>
-<span class="lineNum">      56 </span><span class="lineCov">          2 :       return Center(</span>
-<span class="lineNum">      57 </span><span class="lineCov">          2 :         child: CircularProgressIndicator(),</span>
-<span class="lineNum">      58 </span>            :       );
-<span class="lineNum">      59 </span>            :     }
-<span class="lineNum">      60 </span>            : 
-<span class="lineNum">      61 </span><span class="lineCov">          3 :     if (data?.imgUrl == '') {</span>
-<span class="lineNum">      62 </span><span class="lineNoCov">          0 :       return Center(</span>
-<span class="lineNum">      63 </span><span class="lineNoCov">          0 :         child: Column(</span>
-<span class="lineNum">      64 </span>            :           mainAxisAlignment: MainAxisAlignment.center,
-<span class="lineNum">      65 </span>            :           crossAxisAlignment: CrossAxisAlignment.center,
-<span class="lineNum">      66 </span><span class="lineNoCov">          0 :           children: &lt;Widget&gt;[</span>
-<span class="lineNum">      67 </span><span class="lineNoCov">          0 :             Icon(</span>
-<span class="lineNum">      68 </span>            :               Icons.network_check,
-<span class="lineNum">      69 </span>            :               size: 50,
-<span class="lineNum">      70 </span>            :               color: Colors.red,
-<span class="lineNum">      71 </span>            :             ),
-<span class="lineNum">      72 </span><span class="lineNoCov">          0 :             Text('Please check network connection'),</span>
-<span class="lineNum">      73 </span>            :           ],
-<span class="lineNum">      74 </span>            :         ),
-<span class="lineNum">      75 </span>            :       );
-<span class="lineNum">      76 </span>            :     }
-<span class="lineNum">      77 </span>            : 
-<span class="lineNum">      78 </span>            :     return null;
-<span class="lineNum">      79 </span>            :   }
-<span class="lineNum">      80 </span>            : }
+<span class="lineNum">      54 </span>            :     return null;
+<span class="lineNum">      55 </span>            :   }
+<span class="lineNum">      56 </span>            : 
+<span class="lineNum">      57 </span><span class="lineCov">          2 :   Widget getContainerChild() {</span>
+<span class="lineNum">      58 </span><span class="lineCov">          3 :     if (data?.imgUrl == null) {</span>
+<span class="lineNum">      59 </span><span class="lineCov">          2 :       return Center(</span>
+<span class="lineNum">      60 </span><span class="lineCov">          2 :         child: CircularProgressIndicator(),</span>
+<span class="lineNum">      61 </span>            :       );
+<span class="lineNum">      62 </span>            :     }
+<span class="lineNum">      63 </span>            : 
+<span class="lineNum">      64 </span><span class="lineCov">          3 :     if (data?.imgUrl == '') {</span>
+<span class="lineNum">      65 </span><span class="lineNoCov">          0 :       return Center(</span>
+<span class="lineNum">      66 </span><span class="lineNoCov">          0 :         child: Column(</span>
+<span class="lineNum">      67 </span>            :           mainAxisAlignment: MainAxisAlignment.center,
+<span class="lineNum">      68 </span>            :           crossAxisAlignment: CrossAxisAlignment.center,
+<span class="lineNum">      69 </span><span class="lineNoCov">          0 :           children: &lt;Widget&gt;[</span>
+<span class="lineNum">      70 </span><span class="lineNoCov">          0 :             Icon(</span>
+<span class="lineNum">      71 </span>            :               Icons.network_check,
+<span class="lineNum">      72 </span>            :               size: 50,
+<span class="lineNum">      73 </span>            :               color: Colors.red,
+<span class="lineNum">      74 </span>            :             ),
+<span class="lineNum">      75 </span><span class="lineNoCov">          0 :             Text('Please check network connection'),</span>
+<span class="lineNum">      76 </span>            :           ],
+<span class="lineNum">      77 </span>            :         ),
+<span class="lineNum">      78 </span>            :       );
+<span class="lineNum">      79 </span>            :     }
+<span class="lineNum">      80 </span>            : 
+<span class="lineNum">      81 </span>            :     return null;
+<span class="lineNum">      82 </span>            :   }
+<span class="lineNum">      83 </span>            : }
 </pre>
       </td>
     </tr>

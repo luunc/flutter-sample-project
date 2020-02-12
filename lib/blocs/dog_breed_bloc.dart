@@ -44,9 +44,9 @@ class NumberTriviaBloc {
         'imgUrl': breed['url'],
       };
 
-      final newTrivia = DogBreed.fromMap(breedMap);
+      final newBreed = DogBreed.fromMap(breedMap);
 
-      _subjectDogBreed.sink.add(newTrivia);
+      _subjectDogBreed.sink.add(newBreed);
     } catch (e) {
       _subjectDogBreed.sink.add(DogBreed(imgUrl: '', name: '', origin: ''));
     }
@@ -55,4 +55,8 @@ class NumberTriviaBloc {
   void dispose() {
     _subjectDogBreed.close();
   }
+
+  /////////////////////////////////////////////////////////////////////////////
+  // TESTING
+  bool get isClosed => _subjectDogBreed.isClosed;
 }
