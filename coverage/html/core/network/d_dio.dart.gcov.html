@@ -1,0 +1,191 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>LCOV - lcov.info - core/network/d_dio.dart</title>
+  <link rel="stylesheet" type="text/css" href="../../gcov.css">
+</head>
+
+<body>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="title">LCOV - code coverage report</td></tr>
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+
+    <tr>
+      <td width="100%">
+        <table cellpadding=1 border=0 width="100%">
+          <tr>
+            <td width="10%" class="headerItem">Current view:</td>
+            <td width="35%" class="headerValue"><a href="../../index.html">top level</a> - <a href="index.html">core/network</a> - d_dio.dart<span style="font-size: 80%;"> (source / <a href="d_dio.dart.func-sort-c.html">functions</a>)</span></td>
+            <td width="5%"></td>
+            <td width="15%"></td>
+            <td width="10%" class="headerCovTableHead">Hit</td>
+            <td width="10%" class="headerCovTableHead">Total</td>
+            <td width="15%" class="headerCovTableHead">Coverage</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Test:</td>
+            <td class="headerValue">lcov.info</td>
+            <td></td>
+            <td class="headerItem">Lines:</td>
+            <td class="headerCovTableEntry">11</td>
+            <td class="headerCovTableEntry">21</td>
+            <td class="headerCovTableEntryLo">52.4 %</td>
+          </tr>
+          <tr>
+            <td class="headerItem">Date:</td>
+            <td class="headerValue">2020-02-11 17:32:00</td>
+            <td></td>
+            <td class="headerItem">Functions:</td>
+            <td class="headerCovTableEntry">0</td>
+            <td class="headerCovTableEntry">0</td>
+            <td class="headerCovTableEntryHi">-</td>
+          </tr>
+          <tr><td><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+  </table>
+
+  <table cellpadding=0 cellspacing=0 border=0>
+    <tr>
+      <td><br></td>
+    </tr>
+    <tr>
+      <td>
+<pre class="sourceHeading">          Line data    Source code</pre>
+<pre class="source">
+<a name="1"><span class="lineNum">       1 </span>            : import 'package:dio/dio.dart';</a>
+<span class="lineNum">       2 </span>            : import 'package:dxdart/core/constants.dart';
+<span class="lineNum">       3 </span>            : import 'package:dxdart/core/network/network_info.dart';
+<span class="lineNum">       4 </span>            : 
+<span class="lineNum">       5 </span><span class="lineCov">          3 : final BaseOptions dioBaseOption = BaseOptions(</span>
+<span class="lineNum">       6 </span>            :   connectTimeout: 10000,
+<span class="lineNum">       7 </span>            :   receiveTimeout: 10000,
+<span class="lineNum">       8 </span>            :   sendTimeout: 10000,
+<span class="lineNum">       9 </span>            : );
+<span class="lineNum">      10 </span>            : 
+<span class="lineNum">      11 </span>            : class DDio {
+<span class="lineNum">      12 </span>            :   final NetworkInfo networkInfo;
+<span class="lineNum">      13 </span>            :   final Dio dio;
+<span class="lineNum">      14 </span>            : 
+<span class="lineNum">      15 </span><span class="lineCov">          1 :   DDio({this.networkInfo, this.dio}) {</span>
+<span class="lineNum">      16 </span><span class="lineCov">          3 :     dio.options = dioBaseOption;</span>
+<span class="lineNum">      17 </span>            : 
+<span class="lineNum">      18 </span><span class="lineCov">          3 :     dio.interceptors.add(</span>
+<span class="lineNum">      19 </span><span class="lineCov">          1 :       InterceptorsWrapper(</span>
+<span class="lineNum">      20 </span><span class="lineCov">          1 :         onRequest: onRequest,</span>
+<span class="lineNum">      21 </span><span class="lineCov">          1 :         onResponse: onResponse,</span>
+<span class="lineNum">      22 </span><span class="lineCov">          1 :         onError: onError,</span>
+<span class="lineNum">      23 </span>            :       ),
+<span class="lineNum">      24 </span>            :     );
+<span class="lineNum">      25 </span>            :   }
+<span class="lineNum">      26 </span>            : 
+<span class="lineNum">      27 </span><span class="lineCov">          1 :   Future&lt;dynamic&gt; onRequest(RequestOptions options) async {</span>
+<span class="lineNum">      28 </span><span class="lineCov">          3 :     if (!await networkInfo.isConnected) {</span>
+<span class="lineNum">      29 </span>            :       throw Exception;
+<span class="lineNum">      30 </span>            :     }
+<span class="lineNum">      31 </span>            : 
+<span class="lineNum">      32 </span><span class="lineCov">          2 :     options.headers = {'x-api-key': API_KEY};</span>
+<span class="lineNum">      33 </span>            :     return options;
+<span class="lineNum">      34 </span>            :   }
+<span class="lineNum">      35 </span>            : 
+<span class="lineNum">      36 </span><span class="lineNoCov">          0 :   Future&lt;dynamic&gt; onResponse(Response response) async {</span>
+<span class="lineNum">      37 </span>            :     return response;
+<span class="lineNum">      38 </span>            :   }
+<span class="lineNum">      39 </span>            : 
+<span class="lineNum">      40 </span><span class="lineNoCov">          0 :   Future&lt;dynamic&gt; onError(DioError e) async {</span>
+<span class="lineNum">      41 </span>            :     return e;
+<span class="lineNum">      42 </span>            :   }
+<span class="lineNum">      43 </span>            : 
+<span class="lineNum">      44 </span><span class="lineNoCov">          0 :   Future&lt;Response&gt; get(</span>
+<span class="lineNum">      45 </span>            :     String path, {
+<span class="lineNum">      46 </span>            :     Map&lt;String, dynamic&gt; queryParameters,
+<span class="lineNum">      47 </span>            :     Options options,
+<span class="lineNum">      48 </span>            :     CancelToken cancelToken,
+<span class="lineNum">      49 </span>            :     ProgressCallback onReceiveProgress,
+<span class="lineNum">      50 </span>            :   }) {
+<span class="lineNum">      51 </span><span class="lineNoCov">          0 :     return dio.get(</span>
+<span class="lineNum">      52 </span>            :       path,
+<span class="lineNum">      53 </span>            :       queryParameters: queryParameters,
+<span class="lineNum">      54 </span>            :       options: options,
+<span class="lineNum">      55 </span>            :       cancelToken: cancelToken,
+<span class="lineNum">      56 </span>            :       onReceiveProgress: onReceiveProgress,
+<span class="lineNum">      57 </span>            :     );
+<span class="lineNum">      58 </span>            :   }
+<span class="lineNum">      59 </span>            : 
+<span class="lineNum">      60 </span><span class="lineNoCov">          0 :   Future&lt;Response&gt; post(</span>
+<span class="lineNum">      61 </span>            :     String path, {
+<span class="lineNum">      62 </span>            :     data,
+<span class="lineNum">      63 </span>            :     Map&lt;String, dynamic&gt; queryParameters,
+<span class="lineNum">      64 </span>            :     Options options,
+<span class="lineNum">      65 </span>            :     CancelToken cancelToken,
+<span class="lineNum">      66 </span>            :     ProgressCallback onSendProgress,
+<span class="lineNum">      67 </span>            :     ProgressCallback onReceiveProgress,
+<span class="lineNum">      68 </span>            :   }) {
+<span class="lineNum">      69 </span><span class="lineNoCov">          0 :     return dio.post(</span>
+<span class="lineNum">      70 </span>            :       path,
+<span class="lineNum">      71 </span>            :       data: data,
+<span class="lineNum">      72 </span>            :       queryParameters: queryParameters,
+<span class="lineNum">      73 </span>            :       options: options,
+<span class="lineNum">      74 </span>            :       cancelToken: cancelToken,
+<span class="lineNum">      75 </span>            :       onSendProgress: onSendProgress,
+<span class="lineNum">      76 </span>            :       onReceiveProgress: onReceiveProgress,
+<span class="lineNum">      77 </span>            :     );
+<span class="lineNum">      78 </span>            :   }
+<span class="lineNum">      79 </span>            : 
+<span class="lineNum">      80 </span><span class="lineNoCov">          0 :   Future&lt;Response&gt; put(</span>
+<span class="lineNum">      81 </span>            :     String path, {
+<span class="lineNum">      82 </span>            :     data,
+<span class="lineNum">      83 </span>            :     Map&lt;String, dynamic&gt; queryParameters,
+<span class="lineNum">      84 </span>            :     Options options,
+<span class="lineNum">      85 </span>            :     CancelToken cancelToken,
+<span class="lineNum">      86 </span>            :     ProgressCallback onSendProgress,
+<span class="lineNum">      87 </span>            :     ProgressCallback onReceiveProgress,
+<span class="lineNum">      88 </span>            :   }) {
+<span class="lineNum">      89 </span><span class="lineNoCov">          0 :     return dio.put(</span>
+<span class="lineNum">      90 </span>            :       path,
+<span class="lineNum">      91 </span>            :       data: data,
+<span class="lineNum">      92 </span>            :       queryParameters: queryParameters,
+<span class="lineNum">      93 </span>            :       options: options,
+<span class="lineNum">      94 </span>            :       cancelToken: cancelToken,
+<span class="lineNum">      95 </span>            :       onSendProgress: onSendProgress,
+<span class="lineNum">      96 </span>            :       onReceiveProgress: onReceiveProgress,
+<span class="lineNum">      97 </span>            :     );
+<span class="lineNum">      98 </span>            :   }
+<span class="lineNum">      99 </span>            : 
+<span class="lineNum">     100 </span><span class="lineNoCov">          0 :   Future&lt;Response&gt; delete(</span>
+<span class="lineNum">     101 </span>            :     String path, {
+<span class="lineNum">     102 </span>            :     data,
+<span class="lineNum">     103 </span>            :     Map&lt;String, dynamic&gt; queryParameters,
+<span class="lineNum">     104 </span>            :     Options options,
+<span class="lineNum">     105 </span>            :     CancelToken cancelToken,
+<span class="lineNum">     106 </span>            :   }) {
+<span class="lineNum">     107 </span><span class="lineNoCov">          0 :     return dio.delete(</span>
+<span class="lineNum">     108 </span>            :       path,
+<span class="lineNum">     109 </span>            :       data: data,
+<span class="lineNum">     110 </span>            :       queryParameters: queryParameters,
+<span class="lineNum">     111 </span>            :       options: options,
+<span class="lineNum">     112 </span>            :       cancelToken: cancelToken,
+<span class="lineNum">     113 </span>            :     );
+<span class="lineNum">     114 </span>            :   }
+<span class="lineNum">     115 </span>            : }
+</pre>
+      </td>
+    </tr>
+  </table>
+  <br>
+
+  <table width="100%" border=0 cellspacing=0 cellpadding=0>
+    <tr><td class="ruler"><img src="../../glass.png" width=3 height=3 alt=""></td></tr>
+    <tr><td class="versionInfo">Generated by: <a href="http://ltp.sourceforge.net/coverage/lcov.php" target="_parent">LCOV version 1.13</a></td></tr>
+  </table>
+  <br>
+
+</body>
+</html>
